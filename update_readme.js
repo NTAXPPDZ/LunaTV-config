@@ -1,17 +1,31 @@
 //  update_readme.js
+//  作用：把 report.md 的检测结果写回 README，并按实际 JSON 文件刷新「配置源数量」统计
 const fs = require('fs');
 const path = require('path');
 
 const reportPath = path.join(__dirname, 'report.md');
 const readmePath = path.join(__dirname, 'README.md');
 
-// 读取 report.md
+// 需要同步「配置源对比」统计的文档
+const STATS_DOCS = [
+    path.join(__dirname, 'README.md'),
+    path.join(__dirname, 'CORSAPI', 'README.md')
+];
+
+const STATS_START = '<!-- SOURCE_STATS_START -->';
+const STATS_END = '<!-- SOURCE_STATS_END -->';
+
+// === 1. 读取 report.md ===
+// Windows 上工作区文件是 CRLF，脚本统一按 LF 处理，否则表格正则永远匹配不到
+const readText = (filePath) => fs.readFileSync(filePath, 'utf-8').replace(/\r\n/g, '\n');
+const writeText = (filePath, content) => fs.writeFileSync(filePath, content, 'utf-8');
+
 if (!fs.existsSync(reportPath)) {
     console.error('❌ report.md 不存在，请先运行 check_api.js');
     process.exit(1);
 }
 
-const reportContent = fs.readFileSync(reportPath, 'utf-8');
+const reportContent = readText(reportPath);
 
 // 提取 Markdown 表格
 const tableMatch = reportContent.match(/\| 状态 \|[\s\S]+?\n\n/);
@@ -35,7 +49,6 @@ const rowsWithData = rows.map(line => {
     const successCount = parseInt(cols[6]) || 0; // 成功次数
     const failCount = parseInt(cols[7]) || 0; // 失败次数
     const availabilityStr = cols[8]; // 可用率列
-    const consecutiveFailDays = parseInt(cols[8]) || 0; // 连续失败天数
 
     // 提取可用率数字（去掉%符号）
     const availabilityMatch = availabilityStr.match(/(\d+\.?\d*)%/);
@@ -50,7 +63,6 @@ const rowsWithData = rows.map(line => {
         successCount: successCount,
         failCount: failCount,
         availability: availability,
-        consecutiveFailDays: consecutiveFailDays,
         isSuccess: status.includes('✅')
     };
 });
@@ -104,7 +116,7 @@ const tableBlock =
     `<!-- API_TABLE_START -->\n${tableMd}\n<!-- API_TABLE_END -->`;
 
 // 读取 README.md（可能不存在）
-let readmeContent = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, 'utf-8') : "";
+let readmeContent = fs.existsSync(readmePath) ? readText(readmePath) : "";
 
 // 替换或追加
 if (readmeContent.includes("<!-- API_TABLE_START -->") && readmeContent.includes("<!-- API_TABLE_END -->")) {
@@ -119,7 +131,62 @@ if (readmeContent.includes("<!-- API_TABLE_START -->") && readmeContent.includes
 }
 
 // 写回文件
-fs.writeFileSync(readmePath, readmeContent, 'utf-8');
+writeText(readmePath, readmeContent);
+
+// === 2. 按实际 JSON 文件刷新「配置源对比」统计 ===
+function loadSourceStats() {
+    const spec = [
+        { file: 'jin18.json', label: 'jin18', usage: '家庭使用、轻量级应用' },
+        { file: 'jingjian.json', label: 'jingjian', usage: '个人使用、中等需求' },
+        { file: 'LunaTV-config.json', label: 'full', usage: '完整功能、最大兼容性' }
+    ];
+
+    return spec.map(({ file, label, usage }) => {
+        const fullPath = path.join(__dirname, file);
+        if (!fs.existsSync(fullPath)) {
+            return { label, count: 0, adult: false, usage, missing: true };
+        }
+        const data = JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+        const sites = Object.values(data.api_site || {});
+        const adult = sites.some(s => String(s.name || '').startsWith('🔞'));
+        return { label, count: sites.length, adult, usage, missing: false };
+    });
+}
+
+function buildStatsBlock(stats) {
+    const rows = stats.map(s => {
+        const adultMark = s.adult ? '✅ 是' : '❌ 否';
+        return `| **${s.label}** | ${s.count}个 | ${adultMark} | ${s.usage} |`;
+    }).join('\n');
+
+    return [
+        STATS_START,
+        '| 配置源 | 资源数量 | 包含成人内容 | 适用场景 |',
+        '| --- | --- | --- | --- |',
+        rows,
+        '',
+        `> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：${now}）。`,
+        STATS_END
+    ].join('\n');
+}
+
+const statsBlock = buildStatsBlock(loadSourceStats());
+
+for (const docPath of STATS_DOCS) {
+    if (!fs.existsSync(docPath)) continue;
+    let content = readText(docPath);
+
+    if (content.includes(STATS_START) && content.includes(STATS_END)) {
+        // 用 split 避免正则里 ${} 之类的意外转义问题
+        const before = content.slice(0, content.indexOf(STATS_START));
+        const after = content.slice(content.indexOf(STATS_END) + STATS_END.length);
+        content = before + statsBlock + after;
+        writeText(docPath, content);
+        console.log(`✅ ${path.relative(__dirname, docPath)} 已刷新配置源数量统计`);
+    } else {
+        console.log(`⚠️ ${path.relative(__dirname, docPath)} 缺少 ${STATS_START} 标记，跳过数量统计`);
+    }
+}
 
 // 输出排序结果摘要
 console.log(`\n📊 统计摘要：`);

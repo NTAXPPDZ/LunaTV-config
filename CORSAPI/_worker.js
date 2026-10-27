@@ -23,10 +23,11 @@ const EXCLUDE_HEADERS = new Set([
   'connection', 'keep-alive', 'set-cookie', 'set-cookie2'
 ])
 
+// 订阅源地址（fork 后改成你自己仓库的 raw 地址）
 const JSON_SOURCES = {
-  'jin18': 'https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/jin18.json',
-  'jingjian': 'https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/jingjian.json',
-  'full': 'https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/LunaTV-config.json'
+  'jin18': 'https://raw.githubusercontent.com/NTAXPPDZ/LunaTV-config/refs/heads/main/jin18.json',
+  'jingjian': 'https://raw.githubusercontent.com/NTAXPPDZ/LunaTV-config/refs/heads/main/jingjian.json',
+  'full': 'https://raw.githubusercontent.com/NTAXPPDZ/LunaTV-config/refs/heads/main/LunaTV-config.json'
 }
 
 const FORMAT_CONFIG = {
@@ -102,7 +103,7 @@ async function getCachedJSON(url) {
     const res = await fetch(url)
     if (!res.ok) throw new Error(`Fetch failed: ${res.status}`)
     const data = await res.json()
-    await KV.put(cacheKey, JSON.stringify(data), { expirationTtl: 1800 })   // 缓存十分钟
+    await KV.put(cacheKey, JSON.stringify(data), { expirationTtl: 1800 })   // 缓存 30 分钟
     return data
   } else {
     const res = await fetch(url)

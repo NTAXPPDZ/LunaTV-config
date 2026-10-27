@@ -24,9 +24,11 @@ https://<你的域名>/?url=https://ikunzyapi.com/api.php/provide/vod/
 
 使用 `?source=` 参数选择不同的资源配置：
 
-- **`source=jin18`** - 精简版（31个资源，仅普通内容）
-- **`source=jingjian`** - 精简+成人版（61个资源）
-- **`source=full`** - 完整版（88个资源，**默认**）
+- **`source=jin18`** - 精简版（仅普通内容）
+- **`source=jingjian`** - 精简+成人版
+- **`source=full`** - 完整版（**默认**）
+
+> 各版本资源数量见下方「配置源对比」，该表由脚本自动生成。
 
 ### 3. 统一的 format 参数
 
@@ -114,17 +116,20 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 | `format` | 配置模式         | `0 或 raw = 原始 JSON`  `1 或 proxy = 添加代理前缀`  `2 或 base58 = 原始 Base58`  `3 或 proxy-base58 = 代理 Base58` | `?format=0` |
 | `source` | 配置源选择       | `jin18` = 精简版`jingjian` = 精简+成人`full` = 完整版） | `?source=jin18` |
 | `prefix` | 自定义代理前缀   | 任意代理地址                      | `?prefix=https://.../?url=` |
-| `errors&limit=10` | 查看错误日志 | `errors&limit=10`                 | `https://<你的域名>?errors&limit=10` |
 
 ---
 
 ## 📦 配置源对比
 
+<!-- SOURCE_STATS_START -->
 | 配置源 | 资源数量 | 包含成人内容 | 适用场景 |
 | --- | --- | --- | --- |
-| **jin18** | 31个 | ❌ 否 | 家庭使用、轻量级应用 |
-| **jingjian** | 61个 | ✅ 是 | 个人使用、中等需求 |
-| **full** | 88个 | ✅ 是 | 完整功能、最大兼容性 |
+| **jin18** | 28个 | ❌ 否 | 家庭使用、轻量级应用 |
+| **jingjian** | 47个 | ✅ 是 | 个人使用、中等需求 |
+| **full** | 69个 | ✅ 是 | 完整功能、最大兼容性 |
+
+> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 08:40 CST）。
+<!-- SOURCE_STATS_END -->
 
 ---
 
@@ -187,7 +192,7 @@ https://<你的域名>/?format=3&source=full
 - **Workers 免费额度**：每天 10 万次请求，适合轻量使用。超出后需升级付费套餐。
 - **代理替换逻辑**：如果 JSON 中 `api` 字段已包含 `?url=` 前缀，会先去掉旧前缀，再加上新前缀。
 - **Base58 输出**：适合直接作为订阅链接在支持该格式的客户端中使用。
-- **配置源更新**：配置源来自 GitHub，内容会定期更新。Worker 会缓存 7200 秒（2小时）。
+- **配置源更新**：配置源来自 GitHub，内容会定期更新。绑定了 KV 时 Worker 缓存 1800 秒（30 分钟）。
 - **超时设置**：默认请求超时时间为 9 秒，超时后会返回错误信息。
 - **CORS 支持**：已启用完整的 CORS 支持，可直接在前端应用中调用。
 

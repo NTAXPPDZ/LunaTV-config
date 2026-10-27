@@ -1,0 +1,55 @@
+name: Sync upstream sources
+
+# 只同步上游的「源清单」这一个文件，其余文件（代码/文档）保留本仓库自己的改动。
+# 拉下来的 LunaTV-config.json 会触发 build-check-encode 工作流，自动重新生成
+# jingjian/jin18、Base58 订阅串、API 报告，所以这里不需要再管派生文件。
+#
+# ⚠️ 如果你要自己维护源清单（手改 LunaTV-config.json），请到 Actions 里把这个
+#    工作流停用，否则每天会被上游覆盖。
+
+on:
+  schedule:
+    - cron: "0 16 * * *"  # 每天北京时间 0 点，早于构建任务 1 小时
+  workflow_dispatch:
+
+concurrency:
+  group: sync-upstream-sources
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch upstream config
+        id: fetch
+        run: |
+          set -euo pipefail
+          UPSTREAM=https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/LunaTV-config.json
+          curl -fsSL "$UPSTREAM" -o /tmp/upstream.json
+
+          # 校验：必须是合法 JSON，且带 api_site 字段，避免上游返回错误页
+          node -e "const j=JSON.parse(require('fs').readFileSync('/tmp/upstream.json','utf8')); if(!j.api_site||!Object.keys(j.api_site).length) { console.error('上游 JSON 结构异常'); process.exit(1) } console.log('上游源数量:', Object.keys(j.api_site).length)"
+
+          if cmp -s /tmp/upstream.json LunaTV-config.json; then
+            echo "上游源清单无变化"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            cp /tmp/upstream.json LunaTV-config.json
+            echo "上游源清单已更新"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add LunaTV-config.json
+          git commit -m "同步上游源清单 ($(date -d '+8 hour' +'%Y-%m-%d %H:%M:%S CST'))"
+          git push

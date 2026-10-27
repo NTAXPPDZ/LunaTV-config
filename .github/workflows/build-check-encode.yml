@@ -12,6 +12,11 @@ on:
         description: '搜索关键字'
         default: 你好
 
+# 同一时间只允许一个构建，避免和「上游源同步」工作流抢 main
+concurrency:
+  group: build-check-encode
+  cancel-in-progress: false
+
 jobs:
   build-check-encode:
     runs-on: ubuntu-latest
@@ -30,7 +35,8 @@ jobs:
           sudo apt-get install -y jq curl
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt-get install -y nodejs
-          npm install bs58 axios
+          # 依赖统一来自 package.json（bs58 + axios），不再临时安装
+          npm install --no-audit --no-fund
 
       # 3️⃣ JSON 处理：生成 jingjian.json
       - name: Generate jingjian.json (strip _comment)
@@ -60,28 +66,9 @@ jobs:
       - name: Validate jin18.json
         run: jq empty jin18.json
 
-      # 5️⃣ Base58 编码
+      # 5️⃣ Base58 编码（直接用仓库里的 encode.js，不再内联生成）
       - name: Encode JSON to Base58
-        run: |
-          cat > encode.js <<'EOF'
-          const fs = require('fs');
-          const bs58 = require('bs58');
-
-          const files = [
-            { input: 'LunaTV-config.json', output: 'LunaTV-config.txt' },
-            { input: 'jingjian.json', output: 'jingjian.txt' },
-            { input: 'jin18.json', output: 'jin18.txt' }
-          ];
-
-          files.forEach(file => {
-            if (!fs.existsSync(file.input)) return;
-            const data = fs.readFileSync(file.input);
-            const encoded = bs58.encode(Buffer.from(data));
-            fs.writeFileSync(file.output, encoded);
-          });
-          EOF
-
-          node encode.js
+        run: node encode.js
 
       # 6️⃣ 运行 API 检查脚本
       - name: Run API check
@@ -90,7 +77,7 @@ jobs:
           echo "检查 API: $API_NAME"
           node check_api.js "$API_NAME"
 
-      # 7️⃣ 更新 README 或报告
+      # 7️⃣ 更新 README（API 状态表 + 配置源数量统计）
       - name: Update report
         run: node update_readme.js
 
@@ -100,18 +87,16 @@ jobs:
           # 配置 Git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # 拉取远程 main 分支，避免冲突
           git fetch origin main
           git reset --soft origin/main
 
           # 添加所有生成文件
-          git add jingjian.json jin18.json LunaTV-config.txt jingjian.txt jin18.txt report.md README.md
+          git add jingjian.json jin18.json LunaTV-config.txt jingjian.txt jin18.txt report.md README.md CORSAPI/README.md
 
           # 提交更新，如果没有变化则输出提示
           git commit -m "自动更新 JSON、Base58 和 API 报告 ($(date -d '+8 hour' +'%Y-%m-%d %H:%M:%S CST'))" || echo "⚠️ 没有文件变化可提交"
 
           # 推送到远程 main
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
-

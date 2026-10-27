@@ -48,13 +48,26 @@ let currentSha = '';
 let editorLoaded = false;
 let isTokenVisible = false;
 
-// GitHub配置
+// GitHub配置（fork 后请改成你自己的 owner/repo）
 const GITHUB_CONFIG = {
-    owner: 'hafrey1',
+    owner: 'NTAXPPDZ',
     repo: 'LunaTV-config',
     path: 'LunaTV-config.json',
     branch: 'main'
 };
+
+// 允许通过 URL 参数临时覆盖，方便多仓库共用同一份编辑器（如 ?owner=xxx&repo=yyy）
+(function applyGithubConfigFromQuery() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        ['owner', 'repo', 'path', 'branch'].forEach((key) => {
+            const value = params.get(key);
+            if (value) GITHUB_CONFIG[key] = value;
+        });
+    } catch (err) {
+        console.warn('URL 参数解析失败，使用默认仓库配置:', err);
+    }
+})();
 
 // JSON错误信息中文映射
 const JSON_ERROR_TRANSLATIONS = {

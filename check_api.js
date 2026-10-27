@@ -118,7 +118,8 @@ const queueRun = (tasks, limit) => {
   const todayResults = await queueRun(tasks, CONCURRENT_LIMIT);
 
   const todayRecord = {
-    date: new Date().toISOString().slice(0, 10),
+    // 用 CST（UTC+8）日期，避免凌晨 0-8 点被记成前一天
+    date: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10),
     keyword: SEARCH_KEYWORD,
     results: todayResults,
   };
