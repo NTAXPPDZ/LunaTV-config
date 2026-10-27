@@ -198,7 +198,7 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 | **jingjian** | 52个 | ✅ 是 | 个人使用、中等需求 |
 | **full** | 73个 | ✅ 是 | 完整功能、最大兼容性 |
 
-> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 10:41 CST）。
+> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 10:43 CST）。
 <!-- SOURCE_STATS_END -->
 
 
@@ -352,7 +352,7 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
   
 # API 健康报告（每日自动检测API状态）
 
-## API 状态（最近更新：2026-10-27 10:41 CST）
+## API 状态（最近更新：2026-10-27 10:43 CST）
 
 - 总 API 数量：73
 - 成功 API 数量：68
