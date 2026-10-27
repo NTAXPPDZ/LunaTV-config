@@ -260,6 +260,11 @@
       "name": "🎬芒果资源",
       "api": "https://caiji.mgzyapi.com/api.php/provide/vod",
       "detail": "https://caiji.mgzyapi.com"
+    },
+    "xyezy.com": {
+      "name": "🔞星夜资源",
+      "api": "https://xyezy.com/api.php/provide/vod",
+      "detail": "https://xyezy.com"
     }
   }
 }
