@@ -1,10 +1,7 @@
 {
-  "generated": "2026-10-27 09:18 CST",
+  "generated": "2026-10-27 09:24 CST",
   "worker": "https://xiaoxia.dpdns.org",
   "proxy": {
-    "api.wwzy.tv": "直连失败/被挡",
-    "wwzy.tv": "直连失败/被挡",
-    "api.xiaojizy.live": "直连失败/被挡",
-    "caiji.semaozy.net": "直连失败/被挡"
+    "api.xiaojizy.live": "直连慢 6.1×"
   }
 }
