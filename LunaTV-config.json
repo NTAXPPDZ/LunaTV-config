@@ -361,6 +361,31 @@
       "name": "🔞-奥斯卡-",
       "api": "https://aosikazy.com/api.php/provide/vod",
       "detail": "https://aosikazy.com"
+    },
+    "jp98.vip": {
+      "name": "🔞精品98",
+      "api": "https://jp98.vip/api.php/provide/vod",
+      "detail": "https://jp98.vip"
+    },
+    "jipinvip1.com": {
+      "name": "🔞极品资源",
+      "api": "https://jipinvip1.com/api.php/provide/vod",
+      "detail": "https://jipinvip1.com"
+    },
+    "tmzyz.com": {
+      "name": "🔞天美资源",
+      "api": "https://tmzyz.com/api.php/provide/vod",
+      "detail": "https://tmzyz.com"
+    },
+    "juliang.live": {
+      "name": "🎬巨量资源",
+      "api": "https://api.juliang.live/api/provide/vod",
+      "detail": "https://juliang.app"
+    },
+    "mgzyapi.com": {
+      "name": "🎬芒果资源",
+      "api": "https://caiji.mgzyapi.com/api.php/provide/vod",
+      "detail": "https://caiji.mgzyapi.com"
     }
   }
 }
