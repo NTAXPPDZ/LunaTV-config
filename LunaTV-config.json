@@ -81,10 +81,10 @@
       "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
       "detail": "https://xinlangapi.com"
     },
-    "tyyszyapi.com": {
-      "name": "🎬天涯影视",
-      "api": "https://tyyszyapi.com/api.php/provide/vod",
-      "detail": "https://tyyszy.com"
+    "api.wwzy.tv": {
+      "name": "🎬旺旺资源",
+      "api": "https://api.wwzy.tv/api.php/provide/vod",
+      "detail": "https://api.wwzy.tv"
     },
     "www.subozy.com": {
       "name": "🎬速播资源",
@@ -158,6 +158,12 @@
       "name": "🎬无尽影视",
       "api": "https://api.wujinapi.com/api.php/provide/vod",
       "detail": "https://wujinzy.com"
+    },
+    "wwzy.tv": {
+      "_comment": "备用",
+      "name": "🎬旺旺短剧",
+      "api": "https://wwzy.tv/api.php/provide/vod",
+      "detail": "https://wwzy.tv"
     },
     "1080zyk4.com": {
       "_comment": "无法搜索",
@@ -357,40 +363,10 @@
       "detail": "https://semaozy1.com"
     },
     "aosikazy.com": {
-      "_comment": "直连（中转对本站返回520，勿加中转前缀）",
+      "_comment": "禁止搜索结果",
       "name": "🔞-奥斯卡-",
       "api": "https://aosikazy.com/api.php/provide/vod",
       "detail": "https://aosikazy.com"
-    },
-    "jp98.vip": {
-      "name": "🔞精品98",
-      "api": "https://jp98.vip/api.php/provide/vod",
-      "detail": "https://jp98.vip"
-    },
-    "jipinvip1.com": {
-      "name": "🔞极品资源",
-      "api": "https://jipinvip1.com/api.php/provide/vod",
-      "detail": "https://jipinvip1.com"
-    },
-    "tmzyz.com": {
-      "name": "🔞天美资源",
-      "api": "https://tmzyz.com/api.php/provide/vod",
-      "detail": "https://tmzyz.com"
-    },
-    "juliang.live": {
-      "name": "🎬巨量资源",
-      "api": "https://api.juliang.live/api/provide/vod",
-      "detail": "https://juliang.app"
-    },
-    "mgzyapi.com": {
-      "name": "🎬芒果资源",
-      "api": "https://caiji.mgzyapi.com/api.php/provide/vod",
-      "detail": "https://caiji.mgzyapi.com"
-    },
-    "xyezy.com": {
-      "name": "🔞星夜资源",
-      "api": "https://xyezy.com/api.php/provide/vod",
-      "detail": "https://xyezy.com"
     }
   }
 }
