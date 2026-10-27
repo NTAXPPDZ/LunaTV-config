@@ -1,6 +1,6 @@
 # 源接口健康检测报告
 
-最近更新时间：2026-10-27 10:46 CST
+最近更新时间：2026-10-27 10:47 CST
 
 **总源数:** 74 | **检测关键词:** 你好
 
@@ -10,11 +10,10 @@
 |------|---------|-----|-----|---------|---------:|--------:|-------:|--------------|
 | 🚨 | 🔞细胞资源 | [Link](https://www.xxibaozyw.com) | [Link](https://www.xxibaozyw.com/api.php/provide/vod) | ❌ | 0 | 30 | 0.0% | ❌❌❌❌❌❌❌ |
 | 🚨 | 🔞香蕉资源 | [Link](https://www.xiangjiaozyw.com) | [Link](https://www.xiangjiaozyw.com/api.php/provide/vod) | ❌ | 0 | 30 | 0.0% | ❌❌❌❌❌❌❌ |
-| ❌ | 🔞黄色仓库 | [Link](https://hsckzy.xyz) | [Link](https://hsckzy.xyz/api.php/provide/vod) | ✅ | 27 | 3 | 90.0% | ✅✅✅✅✅✅❌ |
 | 🛡 | 🎬飘零资源 | [Link](https://p2100.net) | [Link](https://p2100.net/api.php/provide/vod) | 🛡 | 0 | 30 | 0.0% | ❌❌❌🛡🛡🛡🛡 |
 | 🛡 | 🎬百度云zy | [Link](https://bdzy1.com) | [Link](https://pz.v88.qzz.io/?url=https://api.apibdzy.com/api.php/provide/vod) | 🛡 | 0 | 30 | 0.0% | ❌❌❌🛡🛡🛡🛡 |
 | 🛡 | 🎬艾旦影视 | [Link](https://lovedan.net) | [Link](https://pz.v88.qzz.io/?url=https://lovedan.net/api.php/provide/vod) | 🛡 | 0 | 30 | 0.0% | ❌❌❌🛡🛡🛡🛡 |
-| ✅ | 🎬-爱奇艺- | [Link](https://iqiyizyapi.com) | [Link](https://iqiyizyapi.com/api.php/provide/vod) | ✅ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
+| ✅ | 🎬-爱奇艺- | [Link](https://iqiyizyapi.com) | [Link](https://iqiyizyapi.com/api.php/provide/vod) | ❌ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
 | ✅ | 🎬豆瓣资源 | [Link](https://dbzy.tv) | [Link](https://caiji.dbzy5.com/api.php/provide/vod) | 无结果 | 29 | 1 | 96.7% | ✅✅✅✅✅✅✅ |
 | ✅ | 🎬茅台资源 | [Link](https://mtzy.me) | [Link](https://caiji.maotaizy.cc/api.php/provide/vod) | 无结果 | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
 | ✅ | 🎬卧龙资源 | [Link](https://wolongzyw.com) | [Link](https://wolongzyw.com/api.php/provide/vod) | ❌ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
@@ -55,6 +54,7 @@
 | ✅ | 🔞番号资源 | [Link](http://fhapi9.com) | [Link](http://fhapi9.com/api.php/provide/vod) | ✅ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞-老色逼- | [Link](https://apilsbzy1.com) | [Link](https://apilsbzy1.com/api.php/provide/vod) | ✅ | 28 | 2 | 93.3% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞小鸡资源 | [Link](https://xiaojizy.live) | [Link](https://api.xiaojizy.live/provide/vod) | ✅ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
+| ✅ | 🔞黄色仓库 | [Link](https://hsckzy.xyz) | [Link](https://hsckzy.xyz/api.php/provide/vod) | ✅ | 28 | 2 | 93.3% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞-大奶子- | [Link](https://apidanaizi.com) | [Link](https://apidanaizi.com/api.php/provide/vod) | ✅ | 29 | 1 | 96.7% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞jkun资源 | [Link](https://jkunzyapi.com) | [Link](https://jkunzyapi.com/api.php/provide/vod) | ✅ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞乐播资源 | [Link](https://lbapi9.com) | [Link](https://lbapi9.com/api.php/provide/vod) | ✅ | 30 | 0 | 100.0% | ✅✅✅✅✅✅✅ |
@@ -14720,8 +14720,8 @@
         "disabled": false,
         "success": true,
         "blocked": false,
-        "searchStatus": "✅",
-        "ms": 1349
+        "searchStatus": "❌",
+        "ms": 1493
       },
       {
         "name": "🎬豆瓣资源",
@@ -14730,7 +14730,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "无结果",
-        "ms": 624
+        "ms": 847
       },
       {
         "name": "🎬茅台资源",
@@ -14739,7 +14739,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "无结果",
-        "ms": 1273
+        "ms": 1600
       },
       {
         "name": "🎬卧龙资源",
@@ -14748,7 +14748,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 935
+        "ms": 1447
       },
       {
         "name": "🎬iKun资源",
@@ -14757,7 +14757,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 792
+        "ms": 982
       },
       {
         "name": "🎬电影天堂",
@@ -14766,7 +14766,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 991
+        "ms": 1057
       },
       {
         "name": "🎬猫眼资源",
@@ -14775,7 +14775,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1446
+        "ms": 1423
       },
       {
         "name": "🎬量子资源",
@@ -14784,7 +14784,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1383
+        "ms": 1224
       },
       {
         "name": "🎬360 资源",
@@ -14793,7 +14793,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1063
+        "ms": 1200
       },
       {
         "name": "🎬极速资源",
@@ -14802,7 +14802,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 915
+        "ms": 1166
       },
       {
         "name": "🎬魔都资源",
@@ -14811,7 +14811,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 469
+        "ms": 223
       },
       {
         "name": "🎬非凡资源",
@@ -14820,7 +14820,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1472
+        "ms": 1252
       },
       {
         "name": "🎬暴风资源",
@@ -14829,7 +14829,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 482
+        "ms": 204
       },
       {
         "name": "🎬最大资源",
@@ -14838,7 +14838,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 80
+        "ms": 83
       },
       {
         "name": "🎬无尽资源",
@@ -14847,7 +14847,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 280
+        "ms": 105
       },
       {
         "name": "🎬新浪资源",
@@ -14856,7 +14856,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "无结果",
-        "ms": 208
+        "ms": 198
       },
       {
         "name": "🎬天涯影视",
@@ -14865,7 +14865,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 216
+        "ms": 191
       },
       {
         "name": "🎬速播资源",
@@ -14874,7 +14874,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 705
+        "ms": 511
       },
       {
         "name": "🎬金鹰点播",
@@ -14883,7 +14883,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 619
+        "ms": 137
       },
       {
         "name": "🎬飘零资源",
@@ -14892,7 +14892,7 @@
         "success": false,
         "blocked": true,
         "searchStatus": "🛡",
-        "ms": 154
+        "ms": 96
       },
       {
         "name": "🎬U酷影视",
@@ -14901,7 +14901,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 497
+        "ms": 218
       },
       {
         "name": "🎬光速资源",
@@ -14910,7 +14910,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 307
+        "ms": 254
       },
       {
         "name": "🎬红牛资源",
@@ -14919,7 +14919,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 413
+        "ms": 283
       },
       {
         "name": "🎬魔都动漫",
@@ -14928,7 +14928,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 545
+        "ms": 310
       },
       {
         "name": "🎬如意资源",
@@ -14937,7 +14937,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1682
+        "ms": 1404
       },
       {
         "name": "🎬豪华资源",
@@ -14946,7 +14946,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 283
+        "ms": 660
       },
       {
         "name": "🎬百度云zy",
@@ -14955,7 +14955,7 @@
         "success": false,
         "blocked": true,
         "searchStatus": "🛡",
-        "ms": 201
+        "ms": 596
       },
       {
         "name": "🎬艾旦影视",
@@ -14964,7 +14964,7 @@
         "success": false,
         "blocked": true,
         "searchStatus": "🛡",
-        "ms": 189
+        "ms": 530
       },
       {
         "name": "🎬量子影视",
@@ -14973,7 +14973,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 450
+        "ms": 601
       },
       {
         "name": "🎬最大点播",
@@ -14982,7 +14982,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 255
+        "ms": 543
       },
       {
         "name": "🎬无尽影视",
@@ -14991,7 +14991,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 325
+        "ms": 407
       },
       {
         "name": "🎬优质资源",
@@ -15000,7 +15000,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 631
+        "ms": 724
       },
       {
         "name": "🎬虎牙资源",
@@ -15009,7 +15009,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 268
+        "ms": 375
       },
       {
         "name": "🎬鸭鸭资源",
@@ -15018,7 +15018,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 353
+        "ms": 282
       },
       {
         "name": "🎬索尼资源",
@@ -15027,7 +15027,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 156
+        "ms": 191
       },
       {
         "name": "🎬快车资源",
@@ -15036,7 +15036,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 524
+        "ms": 240
       },
       {
         "name": "🎬闪电资源",
@@ -15045,7 +15045,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 302
+        "ms": 209
       },
       {
         "name": "🎬樱花资源",
@@ -15054,7 +15054,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 311
+        "ms": 329
       },
       {
         "name": "🔞麻豆视频",
@@ -15063,7 +15063,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 409
+        "ms": 309
       },
       {
         "name": "🔞155-资源",
@@ -15072,7 +15072,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 85
+        "ms": 97
       },
       {
         "name": "🔞玉兔资源",
@@ -15081,7 +15081,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 204
+        "ms": 121
       },
       {
         "name": "🔞番号资源",
@@ -15090,7 +15090,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 631
+        "ms": 493
       },
       {
         "name": "🔞-老色逼-",
@@ -15099,7 +15099,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 170
+        "ms": 177
       },
       {
         "name": "🔞小鸡资源",
@@ -15108,16 +15108,16 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 235
+        "ms": 131
       },
       {
         "name": "🔞黄色仓库",
         "api": "https://hsckzy.xyz/api.php/provide/vod",
         "disabled": false,
-        "success": false,
+        "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 107
+        "ms": 259
       },
       {
         "name": "🔞-大奶子-",
@@ -15126,7 +15126,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 413
+        "ms": 346
       },
       {
         "name": "🔞jkun资源",
@@ -15135,7 +15135,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 96
+        "ms": 115
       },
       {
         "name": "🔞乐播资源",
@@ -15144,7 +15144,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 833
+        "ms": 652
       },
       {
         "name": "🔞奶香资源",
@@ -15153,7 +15153,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 390
+        "ms": 723
       },
       {
         "name": "🔞森林资源",
@@ -15162,7 +15162,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 370
+        "ms": 269
       },
       {
         "name": "🔞辣椒资源",
@@ -15171,7 +15171,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 409
+        "ms": 183
       },
       {
         "name": "🔞鲨鱼资源",
@@ -15180,7 +15180,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1010
+        "ms": 831
       },
       {
         "name": "🔞豆豆资源",
@@ -15189,7 +15189,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 227
+        "ms": 312
       },
       {
         "name": "🔞滴滴资源",
@@ -15198,7 +15198,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 235
+        "ms": 225
       },
       {
         "name": "🔞黑料资源",
@@ -15207,7 +15207,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1098
+        "ms": 711
       },
       {
         "name": "🔞桃花资源",
@@ -15216,7 +15216,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 815
+        "ms": 1131
       },
       {
         "name": "🔞精品资源",
@@ -15225,7 +15225,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 766
+        "ms": 1011
       },
       {
         "name": "🔞 CK-资源",
@@ -15234,7 +15234,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 243
+        "ms": 117
       },
       {
         "name": "🔞souavZY",
@@ -15243,7 +15243,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 241
+        "ms": 211
       },
       {
         "name": "🔞细胞资源",
@@ -15252,7 +15252,7 @@
         "success": false,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 254
+        "ms": 121
       },
       {
         "name": "🔞香蕉资源",
@@ -15261,7 +15261,7 @@
         "success": false,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 10007
+        "ms": 10006
       },
       {
         "name": "🔞-美少女-",
@@ -15270,7 +15270,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 388
+        "ms": 314
       },
       {
         "name": "🔞-黄AVZY",
@@ -15279,7 +15279,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 518
+        "ms": 553
       },
       {
         "name": "🔞白嫖资源",
@@ -15288,7 +15288,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 479
+        "ms": 297
       },
       {
         "name": "🔞杏吧资源",
@@ -15297,7 +15297,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 434
+        "ms": 436
       },
       {
         "name": "🔞大地资源",
@@ -15306,7 +15306,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 1781
+        "ms": 1485
       },
       {
         "name": "🔞色猫资源",
@@ -15315,7 +15315,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "无结果",
-        "ms": 286
+        "ms": 221
       },
       {
         "name": "🔞-奥斯卡-",
@@ -15324,7 +15324,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "❌",
-        "ms": 968
+        "ms": 1011
       },
       {
         "name": "🔞精品98",
@@ -15333,7 +15333,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 575
+        "ms": 788
       },
       {
         "name": "🔞极品资源",
@@ -15342,7 +15342,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 490
+        "ms": 481
       },
       {
         "name": "🔞天美资源",
@@ -15351,7 +15351,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 595
+        "ms": 807
       },
       {
         "name": "🎬巨量资源",
@@ -15360,7 +15360,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 1448
+        "ms": 1196
       },
       {
         "name": "🎬芒果资源",
@@ -15369,7 +15369,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 218
+        "ms": 265
       },
       {
         "name": "🔞星夜资源",
@@ -15378,7 +15378,7 @@
         "success": true,
         "blocked": false,
         "searchStatus": "✅",
-        "ms": 432
+        "ms": 729
       }
     ]
   }
