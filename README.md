@@ -105,7 +105,7 @@ https://<你的域名>/?url=https://ikunzyapi.com/api.php/provide/vod/
 5. （可选）若项目使用 KV 存储：
 - 存储和数据库 → Workers KV → Ceate instance  → 命名空间名称（KV Namespaces） 创建一个新的命名空间。
 - 命名空间名称可自定义，例如：MyKVNamespace。
-- 在 Worker设置 绑定 → 添加绑定 → KV命名空间 → 添加绑定 → 变量名为：CONFIG_KV → 创建的KV命名空间 → 添加绑定 。
+- 在 Worker 设置 → 绑定（Bindings）→ 添加 → KV 命名空间 → 变量名填 `KV`（代码默认读这个名，也兼容 `CONFIG_KV`）→ 选择创建的 KV 命名空间 → 保存。
 6. 绑定自定义域名：打开 Worker 设置 → Triggers(域和路由) → 添加 → Custom Domains(自定义域名)，添加你的域名并保存。
 
 📦 部署到 Cloudflare Pages
@@ -116,8 +116,8 @@ https://<你的域名>/?url=https://ikunzyapi.com/api.php/provide/vod/
 4. 前往 Workers & Pages → 创建应用程序（Create Application） → Pages → 上传资产（开始使用） → 项目命名 → 创建项目 → 从计算机中选择 → 上传文件夹 → 选择新建的文件 → 部署站点（Deploy Site）。
 5. （可选）如需使用 KV：
 - 存储和数据库 → Workers KV → Ceate instance  → 命名空间名称（KV Namespaces） 创建一个KV命名空间。
-- 新建命名空间（名称随意），绑定变量名为：CONFIG_KV。
-- 部署完成后，前往 Pages 控制台 → 设置 → 绑定（Bindings） → 添加 → KV 命名空间  →  变量名为：CONFIG_KV → 选择创建的KV空间 → 保存。
+- 新建命名空间（名称随意），绑定变量名填 `KV`。
+- 部署完成后，前往 Pages 控制台 → 设置 → 绑定（Bindings） → 添加 → KV 命名空间 → 变量名填 `KV` → 选择创建的 KV 空间 → 保存。
 - 保存后返回 “部署” 选项卡。
 8. 点击 创建新部署（Create New Deployment），重新上传文件并点击 保存并部署 即可。
 

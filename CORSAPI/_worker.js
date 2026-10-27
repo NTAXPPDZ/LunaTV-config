@@ -1,11 +1,14 @@
 // 统一入口：兼容 Cloudflare Workers 和 Pages Functions
 export default {
   async fetch(request, env, ctx) {
-    // Pages Functions 中 KV 需要从 env 中获取
-    if (env && env.KV && typeof globalThis.KV === 'undefined') {
-      globalThis.KV = env.KV
+    // KV 绑定名兼容：KV / CONFIG_KV / CONFIG_CACHE 都认（文档以前写 CONFIG_KV，代码只读 KV，导致按文档配了却没用）
+    if (env && typeof globalThis.KV === 'undefined') {
+      const candidate = env.KV || env.CONFIG_KV || env.CONFIG_CACHE
+      if (candidate && typeof candidate.get === 'function') {
+        globalThis.KV = candidate
+      }
     }
-    
+
     return handleRequest(request, env)
   }
 }
