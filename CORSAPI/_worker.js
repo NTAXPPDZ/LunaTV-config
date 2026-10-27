@@ -382,9 +382,11 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
       <tr>
         <td>format</td>
         <td><code>0</code> 或 <code>raw</code> = 原始 JSON<br>
-            <code>1</code> 或 <code>proxy</code> = 添加代理前缀<br>
+            <code>1</code> 或 <code>proxy</code> = 添加代理前缀（全部走中转）<br>
             <code>2</code> 或 <code>base58</code> = 原始 Base58 编码<br>
-            <code>3</code> 或 <code>proxy-base58</code> = 代理 Base58 编码</td>
+            <code>3</code> 或 <code>proxy-base58</code> = 代理 Base58 编码（全部走中转）<br>
+            <code>4</code> 或 <code>mixed</code> = 混合：只给名单内慢/不通的源走中转<br>
+            <code>5</code> 或 <code>mixed-base58</code> = 混合 Base58（推荐订阅）</td>
       </tr>
       <tr>
         <td>mode</td>
@@ -412,6 +414,8 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
     <p>中转代理 JSON：<br><code class="copyable">${currentOrigin}?format=1&source=jin18</code> <button class="copy-btn">复制</button></p>
     <p>原始 Base58：<br><code class="copyable">${currentOrigin}?format=2&source=jin18</code> <button class="copy-btn">复制</button></p>
     <p>中转 Base58：<br><code class="copyable">${currentOrigin}?format=3&source=jin18</code> <button class="copy-btn">复制</button></p>
+    <p>🆕 混合 JSON（推荐，只把慢/不通的源走中转）：<br><code class="copyable">${currentOrigin}?format=4&source=jin18</code> <button class="copy-btn">复制</button></p>
+    <p>🆕 混合 Base58（订阅用）：<br><code class="copyable">${currentOrigin}?format=5&source=jin18</code> <button class="copy-btn">复制</button></p>
   </div>
   
   <div class="section">
@@ -420,6 +424,8 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
     <p>中转代理 JSON：<br><code class="copyable">${currentOrigin}?format=1&source=jingjian</code> <button class="copy-btn">复制</button></p>
     <p>原始 Base58：<br><code class="copyable">${currentOrigin}?format=2&source=jingjian</code> <button class="copy-btn">复制</button></p>
     <p>中转 Base58：<br><code class="copyable">${currentOrigin}?format=3&source=jingjian</code> <button class="copy-btn">复制</button></p>
+    <p>🆕 混合 JSON（推荐，只把慢/不通的源走中转）：<br><code class="copyable">${currentOrigin}?format=4&source=jingjian</code> <button class="copy-btn">复制</button></p>
+    <p>🆕 混合 Base58（订阅用）：<br><code class="copyable">${currentOrigin}?format=5&source=jingjian</code> <button class="copy-btn">复制</button></p>
   </div>
   
   <div class="section">
@@ -428,6 +434,8 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
     <p>中转代理 JSON：<br><code class="copyable">${currentOrigin}?format=1&source=full</code> <button class="copy-btn">复制</button></p>
     <p>原始 Base58：<br><code class="copyable">${currentOrigin}?format=2&source=full</code> <button class="copy-btn">复制</button></p>
     <p>中转 Base58：<br><code class="copyable">${currentOrigin}?format=3&source=full</code> <button class="copy-btn">复制</button></p>
+    <p>🆕 混合 JSON（推荐，只把慢/不通的源走中转）：<br><code class="copyable">${currentOrigin}?format=4&source=full</code> <button class="copy-btn">复制</button></p>
+    <p>🆕 混合 Base58（订阅用）：<br><code class="copyable">${currentOrigin}?format=5&source=full</code> <button class="copy-btn">复制</button></p>
   </div>
   
   <h2>支持的功能</h2>
@@ -439,6 +447,7 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
     <li>✅ 超时保护（9 秒）</li>
     <li>✅ 支持多种配置源切换</li>
     <li>✅ 支持 Base58 编码输出</li>
+    <li>✅ 支持混合中转（format=4/5，只中转慢源，其余直连）</li>
   </ul>
   
   <script>
