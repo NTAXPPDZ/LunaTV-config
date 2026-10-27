@@ -6,7 +6,7 @@ export default {
       globalThis.KV = env.KV
     }
     
-    return handleRequest(request)
+    return handleRequest(request, env)
   }
 }
 
@@ -30,15 +30,43 @@ const JSON_SOURCES = {
   'full': 'https://raw.githubusercontent.com/NTAXPPDZ/LunaTV-config/refs/heads/main/LunaTV-config.json'
 }
 
+// 混合中转白名单：由 probe_routes.js 实测生成，只给这些源加中转前缀
+// 格式映射 { 裸 API 域名: 原因 }，可在 Worker 环境变量 PROXY_ROUTES(JSON) 里覆盖
+const ROUTE_FILE = 'https://raw.githubusercontent.com/NTAXPPDZ/LunaTV-config/refs/heads/main/proxy-routes.json'
+let cachedRoutes = null
+
+async function getProxyRoutes(env) {
+  if (env && env.PROXY_ROUTES) {
+    try { return JSON.parse(env.PROXY_ROUTES).proxy || {} } catch (e) { /* 用文件兜底 */ }
+  }
+  if (cachedRoutes) return cachedRoutes
+  try {
+    const res = await fetch(ROUTE_FILE)
+    if (res.ok) {
+      const data = await res.json()
+      cachedRoutes = data.proxy || {}
+      return cachedRoutes
+    }
+  } catch (e) {
+    console.error('[ROUTES] 读取失败', e.message)
+  }
+  return cachedRoutes || {}
+}
+
 const FORMAT_CONFIG = {
-  '0': { proxy: false, base58: false },
-  'raw': { proxy: false, base58: false },
-  '1': { proxy: true, base58: false },
-  'proxy': { proxy: true, base58: false },
-  '2': { proxy: false, base58: true },
-  'base58': { proxy: false, base58: true },
-  '3': { proxy: true, base58: true },
-  'proxy-base58': { proxy: true, base58: true }
+  '0': { proxy: false, base58: false, mode: 'none' },
+  'raw': { proxy: false, base58: false, mode: 'none' },
+  '1': { proxy: true, base58: false, mode: 'all' },
+  'proxy': { proxy: true, base58: false, mode: 'all' },
+  '2': { proxy: false, base58: true, mode: 'none' },
+  'base58': { proxy: false, base58: true, mode: 'none' },
+  '3': { proxy: true, base58: true, mode: 'all' },
+  'proxy-base58': { proxy: true, base58: true, mode: 'all' },
+  // 混合模式：只给「实测直连慢/不通」的源加中转，其余保持直连
+  '4': { proxy: true, base58: false, mode: 'mixed' },
+  'mixed': { proxy: true, base58: false, mode: 'mixed' },
+  '5': { proxy: true, base58: true, mode: 'mixed' },
+  'mixed-base58': { proxy: true, base58: true, mode: 'mixed' }
 }
 
 // Base58 编码函数
@@ -122,7 +150,7 @@ async function logError(type, info) {
 }
 
 // ---------- 主逻辑 ----------
-async function handleRequest(request) {
+async function handleRequest(request, env) {
   // 快速处理 OPTIONS 请求
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: CORS_HEADERS })
@@ -150,7 +178,7 @@ async function handleRequest(request) {
 
   // JSON 格式输出处理
   if (formatParam !== null) {
-    return handleFormatRequest(formatParam, sourceParam, prefixParam, defaultPrefix)
+    return handleFormatRequest(formatParam, sourceParam, prefixParam, defaultPrefix, env)
   }
 
   // 返回首页文档
@@ -218,7 +246,7 @@ async function handleProxyRequest(request, targetUrlParam, currentOrigin) {
 }
 
 // ---------- JSON 格式输出处理子模块 ----------
-async function handleFormatRequest(formatParam, sourceParam, prefixParam, defaultPrefix) {
+async function handleFormatRequest(formatParam, sourceParam, prefixParam, defaultPrefix, env) {
   try {
     const config = FORMAT_CONFIG[formatParam]
     if (!config) {
@@ -227,25 +255,93 @@ async function handleFormatRequest(formatParam, sourceParam, prefixParam, defaul
 
     const selectedSource = JSON_SOURCES[sourceParam] || JSON_SOURCES['full']
     const data = await getCachedJSON(selectedSource)
-    
-    const newData = config.proxy
-      ? addOrReplacePrefix(data, prefixParam || defaultPrefix)
-      : data
+    const prefix = prefixParam || defaultPrefix
+
+    let newData
+    let proxiedCount = 0
+    if (!config.proxy) {
+      newData = data
+    } else if (config.mode === 'mixed') {
+      // 只给白名单里的源加中转，其余保持直连
+      const routes = await getProxyRoutes(env)
+      newData = applyMixedProxy(data, prefix, routes)
+      proxiedCount = countProxied(newData)
+    } else {
+      newData = addOrReplacePrefix(data, prefix)
+      proxiedCount = countProxied(newData)
+    }
+
+    const headers = {
+      ...CORS_HEADERS,
+      'X-Proxy-Mode': config.mode || 'none',
+      'X-Proxy-Routed': String(proxiedCount),
+    }
 
     if (config.base58) {
       const encoded = base58Encode(newData)
       return new Response(encoded, {
-        headers: { 'Content-Type': 'text/plain;charset=UTF-8', ...CORS_HEADERS },
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8', ...headers },
       })
     } else {
       return new Response(JSON.stringify(newData), {
-        headers: { 'Content-Type': 'application/json;charset=UTF-8', ...CORS_HEADERS },
+        headers: { 'Content-Type': 'application/json;charset=UTF-8', ...headers },
       })
     }
   } catch (err) {
     await logError('json', { message: err.message })
     return errorResponse(err.message, {}, 500)
   }
+}
+
+// 统计有多少条 api 已经带上中转前缀
+function countProxied(obj) {
+  let n = 0
+  if (!obj || typeof obj !== 'object') return 0
+  if (Array.isArray(obj)) return obj.reduce((s, v) => s + countProxied(v), 0)
+  for (const key in obj) {
+    if (key === 'api' && typeof obj[key] === 'string') {
+      if (obj[key].includes('?url=')) n++
+    } else {
+      n += countProxied(obj[key])
+    }
+  }
+  return n
+}
+
+// 判断某个源是否在白名单里（按域名比对，避免 zy.com 这类子串误伤）
+function shouldProxyUrl(rawUrl, routes) {
+  let host
+  try {
+    host = new URL(rawUrl).host.toLowerCase()
+  } catch {
+    return false
+  }
+  for (const key in routes) {
+    const k = key.toLowerCase()
+    if (host === k || host.endsWith('.' + k) || k.endsWith('.' + host)) return true
+  }
+  return false
+}
+
+// 按白名单逐个加前缀：命中 proxy-routes.json 的才走中转，其余保持直连
+function applyMixedProxy(obj, newPrefix, routes) {
+  if (typeof obj !== 'object' || obj === null) return obj
+  if (Array.isArray(obj)) return obj.map(item => applyMixedProxy(item, newPrefix, routes))
+
+  const newObj = {}
+  for (const key in obj) {
+    if (key === 'api' && typeof obj[key] === 'string') {
+      // 先去掉已有的中转外壳，拿到裸地址再判断
+      let rawUrl = obj[key]
+      const urlIndex = rawUrl.indexOf('?url=')
+      if (urlIndex !== -1) rawUrl = rawUrl.slice(urlIndex + 5)
+
+      newObj[key] = shouldProxyUrl(rawUrl, routes) ? newPrefix + rawUrl : rawUrl
+    } else {
+      newObj[key] = applyMixedProxy(obj[key], newPrefix, routes)
+    }
+  }
+  return newObj
 }
 
 // ---------- 首页文档处理 ----------
@@ -286,6 +382,11 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
             <code>1</code> 或 <code>proxy</code> = 添加代理前缀<br>
             <code>2</code> 或 <code>base58</code> = 原始 Base58 编码<br>
             <code>3</code> 或 <code>proxy-base58</code> = 代理 Base58 编码</td>
+      </tr>
+      <tr>
+        <td>mode</td>
+        <td><code>all</code> = format=1/3 全部走中转<br>
+            <code>mixed</code> = format=4/5 只给实测慢/不通的源走中转，其余直连</td>
       </tr>
       <tr>
         <td>source</td>

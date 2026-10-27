@@ -37,7 +37,9 @@ https://<你的域名>/?url=https://ikunzyapi.com/api.php/provide/vod/
 - **`format=0`** 或 **`format=raw`** - 原始 JSON
 - **`format=1`** 或 **`format=proxy`** - 添加代理前缀的 JSON
 - **`format=2`** 或 **`format=base58`** - 原始 JSON 的 Base58 编码
-- **`format=3`** 或 **`format=proxy-base58`** - 代理前缀 JSON 的 Base58 编码
+- **`format=3`** 或 **`format=proxy-base58`** - 代理前缀 JSON 的 Base58 编码（全部走中转）
+- **`format=4`** 或 **`format=mixed`** - 混合 JSON：只给名单里的源加中转，其余直连（推荐）
+- **`format=5`** 或 **`format=mixed-base58`** - 混合模式的 Base58 编码
 
 **示例：**
 
@@ -116,6 +118,7 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 | `format` | 配置模式         | `0 或 raw = 原始 JSON`  `1 或 proxy = 添加代理前缀`  `2 或 base58 = 原始 Base58`  `3 或 proxy-base58 = 代理 Base58` | `?format=0` |
 | `source` | 配置源选择       | `jin18` = 精简版`jingjian` = 精简+成人`full` = 完整版） | `?source=jin18` |
 | `prefix` | 自定义代理前缀   | 任意代理地址                      | `?prefix=https://.../?url=` |
+| `mode` | 中转策略         | `all`（format=1/3 全部中转）<br>`mixed`（format=4/5 只中转名单内的源） | `?format=4` |
 
 ---
 
@@ -128,7 +131,7 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 | **jingjian** | 47个 | ✅ 是 | 个人使用、中等需求 |
 | **full** | 69个 | ✅ 是 | 完整功能、最大兼容性 |
 
-> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 08:57 CST）。
+> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 09:19 CST）。
 <!-- SOURCE_STATS_END -->
 
 ---

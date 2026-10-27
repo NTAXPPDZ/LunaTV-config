@@ -84,13 +84,16 @@ tableMd = [...header, ...sortedRows].join('\n');
 // 统计数据
 const totalApis = rowsWithData.length;
 const successApis = rowsWithData.filter(row => row.isSuccess).length;
-const failApis = totalApis - successApis;
+// 🛡 = 被 Cloudflare/WAF 人机验证挡住，跟「源挂了」要分开算
+const blockedApis = rowsWithData.filter(row => row.status.includes('🛡')).length;
+const failApis = totalApis - successApis - blockedApis;
 
-// 按可用率区间分类
-const perfectApis = rowsWithData.filter(row => row.availability === 100).length;
-const highAvailability = rowsWithData.filter(row => row.availability >= 80 && row.availability < 100).length;
-const mediumAvailability = rowsWithData.filter(row => row.availability >= 50 && row.availability < 80).length;
-const lowAvailability = rowsWithData.filter(row => row.availability < 50).length;
+// 按可用率区间分类（被挑战的源不算低可用率）
+const healthyRows = rowsWithData.filter(row => !row.status.includes('🛡'));
+const perfectApis = healthyRows.filter(row => row.availability === 100).length;
+const highAvailability = healthyRows.filter(row => row.availability >= 80 && row.availability < 100).length;
+const mediumAvailability = healthyRows.filter(row => row.availability >= 50 && row.availability < 80).length;
+const lowAvailability = healthyRows.filter(row => row.availability < 50).length;
 
 // 计算平均可用率
 const averageAvailability = totalApis > 0 ? (rowsWithData.reduce((sum, row) => sum + row.availability, 0) / totalApis).toFixed(1) : 0;
@@ -102,11 +105,15 @@ const now = new Date(Date.now() + 8 * 60 * 60 * 1000)
     .slice(0, 16) + " CST";
 
 // 生成带统计和时间戳的区块
+const blockedLine = blockedApis > 0
+    ? `- 被 CF/WAF 挑战：${blockedApis} 个（源本身可能正常，浏览器可打开）\n`
+    : '';
 const tableBlock =
     `## API 状态（最近更新：${now}）\n\n` +
     `- 总 API 数量：${totalApis}\n` +
     `- 成功 API 数量：${successApis}\n` +
     `- 失败 API 数量：${failApis}\n` +
+    blockedLine +
     `- 平均可用率：${averageAvailability}%\n` +
     `- 完美可用率（100%）：${perfectApis} 个\n` +
     `- 高可用率（80%-99%）：${highAvailability} 个\n` +

@@ -77,11 +77,18 @@ jobs:
           echo "检查 API: $API_NAME"
           node check_api.js "$API_NAME"
 
-      # 7️⃣ 更新 README（API 状态表 + 配置源数量统计）
+      # 7️⃣ 实测「直连 vs 中转」，生成中转白名单（跑在海外机房，能测出真实差异）
+      - name: Probe direct vs worker routes
+        continue-on-error: true
+        env:
+          WORKER: ${{ vars.PROXY_WORKER || 'https://xiaoxia.dpdns.org' }}
+        run: node probe_routes.js
+
+      # 8️⃣ 更新 README（API 状态表 + 配置源数量统计）
       - name: Update report
         run: node update_readme.js
 
-      # 8️⃣ 提交并推送所有生成文件（优化版）
+      # 9️⃣ 提交并推送所有生成文件（优化版）
       - name: Commit and push all generated files
         run: |
           # 配置 Git
@@ -93,7 +100,7 @@ jobs:
           git reset --soft origin/main
 
           # 添加所有生成文件
-          git add jingjian.json jin18.json LunaTV-config.txt jingjian.txt jin18.txt report.md README.md CORSAPI/README.md
+          git add jingjian.json jin18.json LunaTV-config.txt jingjian.txt jin18.txt report.md README.md CORSAPI/README.md proxy-routes.json route-report.md
 
           # 提交更新，如果没有变化则输出提示
           git commit -m "自动更新 JSON、Base58 和 API 报告 ($(date -d '+8 hour' +'%Y-%m-%d %H:%M:%S CST'))" || echo "⚠️ 没有文件变化可提交"
