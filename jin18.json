@@ -140,6 +140,16 @@
       "name": "🎬艾旦影视",
       "api": "https://pz.v88.qzz.io/?url=https://lovedan.net/api.php/provide/vod",
       "detail": "https://lovedan.net"
+    },
+    "juliang.live": {
+      "name": "🎬巨量资源",
+      "api": "https://api.juliang.live/api/provide/vod",
+      "detail": "https://juliang.app"
+    },
+    "mgzyapi.com": {
+      "name": "🎬芒果资源",
+      "api": "https://caiji.mgzyapi.com/api.php/provide/vod",
+      "detail": "https://caiji.mgzyapi.com"
     }
   }
 }
