@@ -129,9 +129,9 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 | --- | --- | --- | --- |
 | **jin18** | 28个 | ❌ 否 | 家庭使用、轻量级应用 |
 | **jingjian** | 47个 | ✅ 是 | 个人使用、中等需求 |
-| **full** | 69个 | ✅ 是 | 完整功能、最大兼容性 |
+| **full** | 68个 | ✅ 是 | 完整功能、最大兼容性 |
 
-> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 09:24 CST）。
+> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 10:30 CST）。
 <!-- SOURCE_STATS_END -->
 
 ---

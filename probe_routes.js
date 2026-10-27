@@ -33,7 +33,8 @@ const SLOWER_RATIO = 1.5;
 const SLOW_ABS_MS = 1800;
 
 // 本机视角：绝不允许走本机代理，否则测出来的是海外结果
-const DIRECT_AXIOS = { proxy: false, timeout: TIMEOUT_MS, validateStatus: () => true };
+// maxRedirects: axios 默认不跟随 301/302；很多 CMS 源会 301 到带斜杠的地址
+const DIRECT_AXIOS = { proxy: false, timeout: TIMEOUT_MS, validateStatus: () => true, maxRedirects: 5 };
 
 const BROWSER_HEADERS = {
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
@@ -61,7 +62,11 @@ const classifyBody = (data, headers) => {
   if (!head) return "empty";
   const ct = String((headers && (headers["content-type"] || headers["Content-Type"])) || "");
   if (/json/i.test(ct) || head.startsWith("{") || head.startsWith("[")) return "json";
-  if (/^<?xml|^<rss/i.test(head)) return "xml";
+  if (/^<\?xml/i.test(head) || /^<rss/i.test(head) || /^<\?xml[^>]*\?>/i.test(head)) return "xml";
+  // 停放/待售页：域名卖掉了，返回 200 但没有数据
+  if (/domain (is )?for sale|buy this domain|_parked|parkingcrew|sedoparking|域名出售/i.test(text.slice(0, 3000))) {
+    return "parked";
+  }
   if (/<!doctype html|<html|<head|<body/i.test(head)) return "html";  // 首页/跳转页，不是接口数据
   return "other";
 };
@@ -82,7 +87,9 @@ const probeOnce = async (url) => {
     if (!ok) {
       if (blocked) error = "CF_CHALLENGE";
       else if (res.status !== 200) error = `HTTP_${res.status}`;
-      else error = kind === "html" ? "返回网站首页(HTML)" : `无效内容(${kind})`;
+      else if (kind === "parked") error = "域名待售/停放页";
+      else if (kind === "html") error = "返回网页而非 API 数据";
+      else error = `无效内容(${kind})`;
     }
     return { ok, status: res.status, ms, blocked, kind, error };
   } catch (e) {
@@ -130,6 +137,8 @@ const queue = async (items, limit, fn) => {
 
   const rows = await queue(entries, CONCURRENCY, async ([key, site]) => {
     const direct = stripProxy(site.api);
+    // 带 _comment=直连 的源：中转对它无效（如奥斯卡返回 520），永远不加前缀
+    const forceDirect = /直连/.test(String(site._comment || ""));
     let host = key;
     try { host = new URL(direct).host.toLowerCase(); } catch {}
 
@@ -142,20 +151,28 @@ const queue = async (items, limit, fn) => {
       probeMulti(direct, SAMPLES),
       probeMulti(workerUrl, 1),
     ]);
-    return { key, host, name: site.name, direct, d, w };
+    return { key, host, name: site.name, direct, d, w, forceDirect };
   });
 
   const results = rows.map((r) => {
     const workerOk = r.w.anyOk;
     let verdict, reason;
 
-    if (r.d.failCount > 0 && workerOk) {
+    if (r.forceDirect) {
+      verdict = "直连";
+      reason = "标了直连（中转对此源无效）";
+    } else if (r.d.failCount > 0 && workerOk) {
       verdict = "中转";
       const why = r.d.anyOk ? `${r.d.failCount}/${SAMPLES} 次直连失败（时通时断）` : "本机直连不通";
       reason = r.d.errors.length ? `${why}：${r.d.errors.slice(0, 2).join("/")}` : why;
     } else if (r.d.failCount > 0 && !workerOk) {
       verdict = "都不通";
-      reason = "直连和中转都失败";
+      const why = (r.d.errors || []).concat(r.w.errors || []).filter(Boolean);
+      const parked = why.includes("域名待售/停放页");
+      const htmls = why.includes("返回网页而非 API 数据");
+      reason = parked ? "域名待售/停放页（源已失效）"
+        : htmls ? "返回网页而非 API 数据（接口已改）"
+        : (why.length ? `直连和中转都失败：${why.slice(0, 2).join("/")}` : "直连和中转都失败");
     } else if (!workerOk) {
       verdict = "直连";
       reason = "中转失败，直连正常";
