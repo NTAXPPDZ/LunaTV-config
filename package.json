@@ -7,8 +7,10 @@
     "encode": "node encode.js",
     "check": "node check_api.js",
     "report": "node update_readme.js",
-    "build": "node encode.js && node probe_routes.js && node update_readme.js",
-    "probe": "node probe_routes.js"
+    "build": "node encode.js && node update_readme.js",
+    "probe": "node probe_routes.js",
+    "probe:cn": "node probe_routes.js",
+    "probe:push": "node probe_routes.js --push"
   },
   "dependencies": {
     "axios": "^1.7.7",
