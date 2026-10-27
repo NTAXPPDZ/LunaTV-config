@@ -127,11 +127,11 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 <!-- SOURCE_STATS_START -->
 | 配置源 | 资源数量 | 包含成人内容 | 适用场景 |
 | --- | --- | --- | --- |
-| **jin18** | 30个 | ❌ 否 | 家庭使用、轻量级应用 |
-| **jingjian** | 53个 | ✅ 是 | 个人使用、中等需求 |
-| **full** | 74个 | ✅ 是 | 完整功能、最大兼容性 |
+| **jin18** | 28个 | ❌ 否 | 家庭使用、轻量级应用 |
+| **jingjian** | 47个 | ✅ 是 | 个人使用、中等需求 |
+| **full** | 69个 | ✅ 是 | 完整功能、最大兼容性 |
 
-> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-27 10:49 CST）。
+> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-10-28 05:03 CST）。
 <!-- SOURCE_STATS_END -->
 
 ---
