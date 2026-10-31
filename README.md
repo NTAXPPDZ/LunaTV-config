@@ -444,15 +444,14 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
 
 ## 🛠 本仓库（Fork）的自动化与本地改动
 
-本仓库是 `hafrey1/LunaTV-config` 的 fork，**不同步上游代码，只同步上游的源清单数据**：
+本仓库是 `hafrey1/LunaTV-config` 的 fork，**完全不同步上游**（代码和源清单都不拉），源清单由本仓库自己维护：
 
 | 工作流 | 频率 | 作用 |
 | --- | --- | --- |
-| `sync-upstream-sources.yml` | 每天 0:00 | **只**拉上游的 `LunaTV-config.json` 源清单（纯数据），随后触发构建 |
-| `build-check-encode.yml` | 每天 1:00 + 源清单变动时 | 派生 `jingjian/jin18`、生成 Base58 订阅串、测源、刷新 README 表格 |
+| `build-check-encode.yml` | 每天 1:00 + 源清单变动时 + 手动 | 派生 `jingjian/jin18`、生成 Base58 订阅串、测源、刷新 README 表格 |
 
-> 上游的代码（编辑器、Worker、脚本、workflow）**一律不会**进到本仓库，本地改动不会被覆盖。
-> 想连源清单也自己维护：到 Actions 停用 `sync-upstream-sources.yml` 即可。
+> ⚠️ 原来的 `sync-upstream-sources.yml` 已删除。它每天会把上游的 `LunaTV-config.json` **整体覆盖**到本仓库，
+> 会冲掉手工新增的源（曾把 74 个源冲回 69 个），所以移除。现在源清单由本仓库独占维护。
 
 本地改动过的位置：
 

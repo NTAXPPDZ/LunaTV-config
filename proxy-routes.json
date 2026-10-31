@@ -1,29 +1,29 @@
 {
-  "generated": "2026-10-27 10:45 CST",
+  "generated": "2026-10-31 19:52 CST",
   "source": "local-cn",
   "worker": "https://xiaoxia.dpdns.org",
   "proxy": {
     "ikunzyapi.com": "本机直连不通：ECONNRESET",
     "cj.lzcaiji.com": "本机直连不通：ECONNRESET",
+    "api.zuidapi.com": "直连慢 1.7×（467ms vs 279ms）",
     "cj.rycjapi.com": "本机直连不通：ECONNRESET",
-    "lovedan.net": "本机直连不通：ECONNREFUSED",
     "zuidazy.me": "本机直连不通：ECONNRESET",
+    "api.wujinapi.com": "直连慢 4.0×（938ms vs 235ms）",
     "api.yzzy-api.com": "本机直连不通：ECONNABORTED",
     "caiji.kuaichezy.org": "本机直连不通：ECONNREFUSED",
     "91md.me": "本机直连不通：ECONNRESET",
+    "fhapi9.com": "2/3 次直连失败（时通时断）：ECONNABORTED",
     "api.xiaojizy.live": "本机直连不通：ECONNREFUSED",
     "naixxzy.com": "本机直连不通：ECONNRESET",
     "apilj.com": "本机直连不通：ECONNABORTED",
-    "shayuapi.com": "本机直连不通：ECONNRESET",
+    "shayuapi.com": "本机直连不通：ECONNABORTED/ECONNRESET",
     "www.jingpinx.com": "本机直连不通：ECONNRESET",
     "xingba222.com": "本机直连不通：ECONNREFUSED",
     "dadiapi.com": "本机直连不通：ECONNABORTED",
-    "caiji.semaozy.net": "本机直连不通：ECONNREFUSED",
-    "jp98.vip": "本机直连不通：ECONNREFUSED",
-    "jipinvip1.com": "本机直连不通：ECONNREFUSED",
-    "api.juliang.live": "直连慢 1.8×（535ms vs 299ms）"
+    "jipinvip1.com": "本机直连不通：ECONNREFUSED"
   },
   "dead": [
+    "caiji.dbzy5.com",
     "wolongzyw.com",
     "www.xxibaozyw.com",
     "www.xiangjiaozyw.com"
