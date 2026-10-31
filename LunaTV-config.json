@@ -6,20 +6,10 @@
       "api": "https://iqiyizyapi.com/api.php/provide/vod",
       "detail": "https://iqiyizyapi.com"
     },
-    "dbzy.tv": {
-      "name": "🎬豆瓣资源",
-      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
-      "detail": "https://dbzy.tv"
-    },
     "mtzy.me": {
       "name": "🎬茅台资源",
       "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
       "detail": "https://mtzy.me"
-    },
-    "wolongzyw.com": {
-      "name": "🎬卧龙资源",
-      "api": "https://wolongzyw.com/api.php/provide/vod",
-      "detail": "https://wolongzyw.com"
     },
     "ikunzy.com": {
       "name": "🎬iKun资源",
@@ -308,18 +298,6 @@
       "api": "https://api.souavzyw.net/api.php/provide/vod",
       "detail": "https://api.souavzyw.net"
     },
-    "www.xxibaozyw.com": {
-      "_comment": "无搜索结果",
-      "name": "🔞细胞资源",
-      "api": "https://www.xxibaozyw.com/api.php/provide/vod",
-      "detail": "https://www.xxibaozyw.com"
-    },
-    "xiangjiaozyw.com": {
-      "_comment": "无搜索结果",
-      "name": "🔞香蕉资源",
-      "api": "https://www.xiangjiaozyw.com/api.php/provide/vod",
-      "detail": "https://www.xiangjiaozyw.com"
-    },
     "www.msnii.com": {
       "_comment": "无法搜索",
       "name": "🔞-美少女-",
@@ -347,14 +325,14 @@
     "dadizy11.com": {
       "_comment": "污染搜索结果",
       "name": "🔞大地资源",
-      "api": "https://dadiapi.com/feifei",
-      "detail": "https://dadizy11.com"
+      "api": "https://dadiapi.com/api.php/provide/vod/",
+      "detail": "https://dadiapi.com"
     },
     "semaozy1.com": {
       "_comment": "无法搜索",
       "name": "🔞色猫资源",
-      "api": "https://caiji.semaozy.net/inc/apijson_vod.php/provide/vod",
-      "detail": "https://semaozy1.com"
+      "api": "https://api.souavzyw.net/api.php/provide/vod/?ac=list",
+      "detail": "https://api.souavzyw.net"
     },
     "aosikazy.com": {
       "_comment": "直连（中转对本站返回520，勿加中转前缀）",
