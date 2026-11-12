@@ -131,7 +131,7 @@ https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.co
 | **jingjian** | 51个 | ✅ 是 | 个人使用、中等需求 |
 | **full** | 70个 | ✅ 是 | 完整功能、最大兼容性 |
 
-> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-11-12 07:12 CST）。
+> 资源数量由 update_readme.js 按仓库内 JSON 自动生成（最近更新：2026-11-13 06:29 CST）。
 <!-- SOURCE_STATS_END -->
 
 ---
